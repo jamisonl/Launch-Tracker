@@ -25,11 +25,16 @@ class Search extends Component {
       })
     })
   }
+  removeHandler = () => {
+    this.setState({
+      searchResult: []
+    })
+  }
   render() { 
     return (
       <List>
         <ListItem>
-        <FormLabel><Input type="text" placeholder="search for launches!" onChange={this.searchTerm}/><IconButton type='submit' onClick={this.searchHandler}><Icon>search</Icon></IconButton></FormLabel>
+        <FormLabel><Input type="text" placeholder="search for launches!" onChange={this.searchTerm}/><IconButton type='submit' onClick={this.searchHandler}><Icon>search</Icon></IconButton><IconButton onClick={this.removeHandler}><Icon>delete</Icon></IconButton></FormLabel>
         </ListItem>
       <SearchResult search = {this.state.searchResult} />
       </List>
