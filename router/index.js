@@ -18,4 +18,4 @@ router.route('/flight_number_history')
 
 
 
-module.exports.router = router;
+module.exports = { router }
