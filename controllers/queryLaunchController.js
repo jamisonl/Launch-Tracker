@@ -1,4 +1,4 @@
-const {getRocket} = require('../db')
+const { getRocket } = require('../db')
 
 const queryLaunchController = {
   'get' : (req, res) => {
@@ -11,4 +11,4 @@ const queryLaunchController = {
   }
 }
 
-module.exports = {queryLaunchController:queryLaunchController}
+module.exports = {queryLaunchController}
