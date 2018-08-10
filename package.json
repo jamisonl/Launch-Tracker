@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@material-ui/core": "^1.4.2",
+    "@material-ui/icons": "^2.0.1",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "bootstrap": "^4.1.1",
@@ -23,6 +24,7 @@
     "css-loader": "^0.28.11",
     "eslint-plugin-react": "^7.10.0",
     "express": "^4.16.3",
+    "jss": "^9.8.7",
     "moment": "^2.22.2",
     "mongodb": "^3.1.1",
     "next": "^6.1.1",
@@ -30,12 +32,11 @@
     "react-dom": "^16.4.0",
     "react-loadable": "^5.4.0",
     "react-youtube": "^7.6.0",
-    "reactstrap": "^6.0.1",
     "request": "^2.87.0",
     "style-loader": "^0.21.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
+    "@babel/core": "^7.0.0-rc.1",
     "babel-loader": "^7.1.4",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-preset-env": "^1.7.0",
