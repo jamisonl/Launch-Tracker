@@ -1,6 +1,4 @@
-const {
-  upcoming
-} = require('../db')
+const { upcoming } = require('../db')
 
 const nextLaunchController = {
   'get': (req, res) => {
@@ -13,6 +11,4 @@ const nextLaunchController = {
   }
 }
 
-module.exports = {
-  nextLaunchController: nextLaunchController
-}
+module.exports = { nextLaunchController }
