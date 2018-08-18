@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 import Yt from 'react-youtube'
-import { List, ListItemText, Typography, withStyles } from '@material-ui/core'
+import { List, ListItemText, Typography, withStyles, Divider } from '@material-ui/core'
 
 const styles = theme => ({
   root: {
@@ -33,6 +33,9 @@ const SearchResult = (props) => {
       <ListItemText>
         <Yt videoId={rocket.links.video_link.split('v=')[1].substring(0, 11)} />
       </ListItemText>
+      <li>
+        <Divider />
+        </li>
     </List>
   ))
 
