@@ -4,11 +4,12 @@
   "description": "A SpaceX Launch Tracker with an upcoming launch countdown clock and a search feature for past launches",
   "main": "index.js",
   "scripts": {
-    "start": "webpack && node server/index.js",
+    "start": "next start -p $PORT",
     "test": "echo \"Error: no test specified\" && exit 1",
     "frontend": "webpack --watch",
     "backend": "nodemon ./server/index",
-    "dev": "next"
+    "dev": "next",
+    "build": "next build"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,7 @@
     "body-parser": "^1.18.3",
     "bootstrap": "^4.1.1",
     "cachios": "^1.1.0",
+    "compression": "^1.7.3",
     "cors": "^2.8.4",
     "css-loader": "^0.28.11",
     "eslint-plugin-react": "^7.10.0",
@@ -33,19 +35,18 @@
     "react-loadable": "^5.4.0",
     "react-youtube": "^7.6.0",
     "request": "^2.87.0",
-    "style-loader": "^0.21.0"
+    "style-loader": "^0.21.0",
+    "styled-jsx": "^3.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-rc.1",
     "babel-loader": "^7.1.4",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "eslint": "^5.2.0",
     "nodemon": "^1.18.3",
     "webpack": "^4.8.3",
-    "webpack-cli": "^2.1.4",
-    "webpack-dev-server": "^3.1.5"
+    "webpack-cli": "^2.1.4"
   }
 }
