@@ -15,10 +15,11 @@ class MyApp extends App {
 
   componentDidMount() {
     // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector('#jss-server-side');
-    if (jssStyles && jssStyles.parentNode) {
-      jssStyles.parentNode.removeChild(jssStyles);
-    }
+    // WARNING: this breaks css when used with node backend instead of next
+    // const jssStyles = document.querySelector('#jss-server-side');
+    // if (jssStyles && jssStyles.parentNode) {
+    //   jssStyles.parentNode.removeChild(jssStyles);
+    // }
   }
 
   render() {
