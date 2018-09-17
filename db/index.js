@@ -1,9 +1,10 @@
-const {
-  MongoClient
-} = require('mongodb');
+const { MongoClient } = require('mongodb');
 
-let _db, _rockets, _upcoming;
+require('dotenv').config()
+
+let _db, _rockets;
 const uri = process.env.DB
+
 MongoClient.connect(uri, {
     poolSize: 10,
     useNewUrlParser: true
@@ -11,13 +12,12 @@ MongoClient.connect(uri, {
   .then(client => {
     console.log('connected to db')
     _db = client.db()
-    _rockets = _db.collection('launch_v2')
-    _upcoming = _db.collection('upcoming_v2')
+    _rockets = _db.collection('launch')
+    _rockets.createIndex({"$**": "text"})
   })
   .catch(err => {
     console.log('error connecting to db \n', err)
   })
-
 
 const getRocket = (id, cb) => {
   if (id) {
@@ -50,49 +50,26 @@ const getRocket = (id, cb) => {
           score:
             {$meta: "textScore"}
         })
-        // .limit(1)
         .toArray()
         .then(data => cb(null, data))
         .catch(err => cb(err, null))
     }
-  } else {
-    _rockets.find({})
-      .project({
-        _id: 0
-      })
-      .sort({
-        flight_number: 1
-      })
-      .toArray()
-      .then(data => cb(null, data))
-      .catch(err => cb(err, null))
   }
 }
-
-const upcoming = (id, cb) => {
-  if (id) {
-    //find one from params
-    _upcoming.findOne({
-        flight_number: +id
-      })
-      .then(data => cb(null, data))
-      .catch(err => cb(err, null))
-  } else {
-    //else find all
-    _upcoming.find({})
-      .project({
-        _id: 0
-      })
-      .sort({
-        flight_number: 1
-      })
-      .toArray()
-      .then(data => cb(null, data))
-      .catch(err => cb(err, null))
-  }
+const getRockets = (cb) => {
+  _rockets.find({})
+  .project({
+    _id: 0
+  })
+  .sort({
+    flight_number: 1
+  })
+  .toArray()
+  .then(data => cb(null, data))
+  .catch(err => cb(err, null))
 }
 
 module.exports = {
   getRocket,
-  upcoming
+  getRockets,
 }
