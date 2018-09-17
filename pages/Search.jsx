@@ -28,7 +28,7 @@ class Search extends Component {
   }
   searchHandler = (e) => {
     e.preventDefault()
-    axios.get(`http://localhost:1336/api/flight_number_history/${this.state.searchTerm}`)
+    axios.get(`http://localhost:1336/api/flight_data/${this.state.searchTerm}`)
     .then(res => {
       this.setState({
         searchResult: res.data
