@@ -4,7 +4,7 @@
   "description": "A SpaceX Launch Tracker with an upcoming launch countdown clock and a search feature for past launches",
   "main": "index.js",
   "scripts": {
-    "start": "next start -p $PORT",
+    "start": "next start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "frontend": "webpack --watch",
     "backend": "nodemon ./server/index",
@@ -24,6 +24,7 @@
     "compression": "^1.7.3",
     "cors": "^2.8.4",
     "css-loader": "^0.28.11",
+    "dotenv": "^6.0.0",
     "eslint-plugin-react": "^7.10.0",
     "express": "^4.16.3",
     "jss": "^9.8.7",
