@@ -13,6 +13,7 @@ const styles = theme => ({
 const Details = (props) => {
   if(props.launch.length) {
     const remaining = moment(props.lTime)
+    const detail = props.launch[0]
     const suffix = props.launch[0].mission_number.toString().slice(-1)
     return (
       <List>
@@ -22,8 +23,9 @@ const Details = (props) => {
       Next Launch: <Countdown dateTo = {remaining}/>
         </ListItemText>
         <ListItemText>
-This will be the {props.launch[0].mission_number}{suffix === 1 ? 'st' : suffix === 2 ? 'nd' : suffix === 3 ? 'rd' : 'th'} launch. The {props.launch[0].rocket_name} will be carrying the {props.launch[0].mission_name} for {props.launch[0].customers}. The {props.launch[0].payload_mass_kg} KG {props.launch[0].payload_type} will be put into a {props.launch[0].regime} {props.launch[0].orbit} orbit{props.launch[0].inclination_deg ? ` with an inclination of ${props.launch[0].inclination_deg} degrees. ` : '. '}
-        It has an operational lifespan of {props.launch[0].lifespan} years.
+This will be the {detail.mission_number}{suffix === 1 ? 'st' : suffix === 2 ? 'nd' : suffix === 3 ? 'rd' : 'th'} launch. The {detail.rocket_name} will be carrying the {detail.mission_name} for {detail.customers}. 
+The {detail.payload_mass_kg ? `${detail.payload_mass_kg} KG`:''} {detail.payload_type ? `${detail.payload_type}` : 'payload'} will be put into a {detail.regime} {detail.orbit} orbit{detail.inclination_deg ? ` with an inclination of ${detail.inclination_deg} degrees. ` : '. '}
+        {detail.lifespan ? `It has an operational lifespan of ${detail.lifespan} years.` : ''}
         </ListItemText>
       </List>
     );
@@ -34,7 +36,9 @@ This will be the {props.launch[0].mission_number}{suffix === 1 ? 'st' : suffix =
 }
 
 Details.propTypes = {
-  classes: PropTypes.object.isRequired,
+  detail: PropTypes.object.isRequired,
+  remaining: PropTypes.object.isRequired,
+  suffix: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(Details)
