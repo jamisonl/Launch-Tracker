@@ -14,7 +14,6 @@ const styles = theme => ({
 });
 
 const SearchResult = (props) => {
-
   let res = props.search.map((rocket, id) => (
     <List key={id}>
       <ListItemText style={{marginLeft: 24, marginBottom: 5}}>
@@ -33,7 +32,7 @@ const SearchResult = (props) => {
         Details: {rocket.details}
       </ListItemText>
       <ListItemText>
-        <Yt videoId={rocket.links.video_link.split('v=')[1].substring(0, 11)} />
+          <Yt videoId={rocket.links.video_link === null ? "bvim4rsNHkQ": rocket.links.video_link.split('v=')[1].substring(0, 11)} /> 
       </ListItemText>
       <li>
         <Divider />
