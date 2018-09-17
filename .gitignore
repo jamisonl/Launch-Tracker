@@ -3,8 +3,12 @@ dist/0.bundle.js
 dist/1.bundle.js
 dist/2.bundle.js
 dist/bundle.js
-
-
+.env
+.dockerignore
+docker-compose.yml
+db/db-seed
+db/Dockerfile
+db/spacex*
 node_modules/
 .next
 
