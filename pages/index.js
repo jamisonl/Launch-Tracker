@@ -42,9 +42,10 @@ class Index extends React.Component {
   }
 
   nextLaunch = (num) => {
-    axios.get(`http://localhost:1336/api/flight_number_future/${num}`)
+    axios.get(`http://localhost:1336/api/flight_data/${num}`)
     .then(flight => {
       if(this.unmounted) return;
+      flight.data = flight.data[0]
         this.setState({
           futureLaunch: [
             {
