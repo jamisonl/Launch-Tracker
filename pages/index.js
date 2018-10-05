@@ -5,13 +5,7 @@ import Search from './Search.jsx'
 import axios from 'axios';
 import {CssBaseline, AppBar, Toolbar, Typography, IconButton, Icon, SvgIcon} from '@material-ui/core'
 import HomeIcon from '@material-ui/icons/Home'
-
-const styles = theme => ({
-  root: {
-    textAlign: 'center',
-    paddingTop: theme.spacing.unit * 20,
-  },
-});
+import PropTypes from 'prop-types'
 
 class Index extends React.Component {
   constructor(props) {
@@ -65,7 +59,8 @@ class Index extends React.Component {
               lifespan: flight.data.rocket.second_stage.payloads[0].orbit_params.lifespan_years,
               regime: flight.data.rocket.second_stage.payloads[0].orbit_params.regime,
               longitude: flight.data.rocket.second_stage.payloads[0].orbit_params.longitude,
-              inclination_deg: flight.data.rocket.second_stage.payloads[0].orbit_params.inclination_deg
+              inclination_deg: flight.data.rocket.second_stage.payloads[0].orbit_params.inclination_deg,
+              launch_site: flight.data.launch_site.site_name_long
 
 
             }
@@ -82,7 +77,7 @@ render() {
     <CssBaseline>
       <AppBar position='sticky'>
       <Toolbar style={{marginLeft: -30}}>
-        <IconButton onClick={this.home}>
+        <IconButton onClick={this.home} aria-label="Scroll to Top">
           <HomeIcon />
         </IconButton>
         <Typography variant="title" color="inherit">
@@ -96,5 +91,10 @@ render() {
   );
 }
 }
+Index.propTypes = {
+  lTime: PropTypes.string,
+  futureLaunch: PropTypes.array,
+  next: PropTypes.string
+}
 
-export default withStyles(styles)(Index);
+export default Index
