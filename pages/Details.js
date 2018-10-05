@@ -2,31 +2,27 @@ import React from 'react';
 import moment from 'moment'
 import PropTypes from 'prop-types'
 import Countdown from './Countdown.jsx'
-import { List, ListItemText, withStyles } from '@material-ui/core';
-const styles = theme => ({
-  root: {
-    textAlign: 'center',
-    paddingTop: theme.spacing.unit * 20,
-  },
-});
+import { List, ListItem, ListItemText, Typography } from '@material-ui/core';
 
 const Details = (props) => {
   if(props.launch.length) {
     const remaining = moment(props.lTime)
     const detail = props.launch[0]
-    const suffix = props.launch[0].mission_number.toString().slice(-1)
+    const suffix = num=>num+(num%10==1&&num%100!=11?'st':num%10==2&&num%100!=12?'nd':num%10==3&&num%100!=13?'rd':'th')
     return (
       <List>
-        <ListItemText>
-        </ListItemText>
-        <ListItemText>
-      Next Launch: <Countdown dateTo = {remaining}/>
-        </ListItemText>
-        <ListItemText>
-This will be the {detail.mission_number}{suffix === 1 ? 'st' : suffix === 2 ? 'nd' : suffix === 3 ? 'rd' : 'th'} launch. The {detail.rocket_name} will be carrying the {detail.mission_name} for {detail.customers}. 
-The {detail.payload_mass_kg ? `${detail.payload_mass_kg} KG`:''} {detail.payload_type ? `${detail.payload_type}` : 'payload'} will be put into a {detail.regime} {detail.orbit} orbit{detail.inclination_deg ? ` with an inclination of ${detail.inclination_deg} degrees. ` : '. '}
-        {detail.lifespan ? `It has an operational lifespan of ${detail.lifespan} years.` : ''}
-        </ListItemText>
+        <ListItem id='countdownLi'>
+      <Typography variant='subheading' color='secondary' align='justify' style={{paddingTop: '.5%'}} id="countdownClock"><Countdown dateTo = {remaining}/></Typography>
+        </ListItem>
+        <ListItem style={{width: '60%'}} id="upcomingDetails" >
+        <Typography align='justify' variant='body1'>
+This will be the {suffix(detail.mission_number)} launch. The {detail.rocket_name} will be carrying the {detail.mission_name} {detail.payload_type} for {detail.customers}. 
+The {detail.payload_mass_lbs ? `${detail.payload_mass_lbs} lbs`:''} {detail.payload_type ? `${detail.payload_type}` : 'payload'} will be put into a {detail.regime} {detail.orbit} orbit{detail.inclination_deg ? ` with an inclination of ${detail.inclination_deg} degrees. ` : '. '}
+        {detail.lifespan ? `${detail.payload_type ? `The ${detail.payload_type}` : 'It'} has an operational lifespan of ${detail.lifespan} years.` : ''} 
+        {detail.block ? `This is a ${detail.rocket_name} Block ${detail.block} booster ${detail.flight ? `on its ${suffix(detail.flight)} flight. ` : ''}` : ''} 
+        {detail.launch_site ? `It will launch from ${detail.launch_site}.` : ''} {detail.landing_type ? `It will attempt an ${detail.landing_type} landing on ${detail.landing_vehicle}.` : ''}
+        </Typography>
+        </ListItem>
       </List>
     );
   }
@@ -36,9 +32,8 @@ The {detail.payload_mass_kg ? `${detail.payload_mass_kg} KG`:''} {detail.payload
 }
 
 Details.propTypes = {
-  detail: PropTypes.object.isRequired,
-  remaining: PropTypes.object.isRequired,
-  suffix: PropTypes.string.isRequired
+  detail: PropTypes.object,
+  remaining: PropTypes.object,
 };
 
-export default withStyles(styles)(Details)
+export default Details
