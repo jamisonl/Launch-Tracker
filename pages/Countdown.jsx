@@ -35,10 +35,16 @@ class Countdown extends Component {
     var day = this.state.dateTo.diff(now, "days");
     this.setState({
       now: now,
-      day: day < 10 ? "0" + day : day,
-      hour: hour < 10 ? "0" + hour : hour,
-      min: min < 10 ? "0" + min : min,
-      sec: sec < 10 ? "0" + sec : sec
+      //clock format style
+      // day: day < 10 ? "0" + day : day,
+      // hour: hour < 10 ? "0" + hour : hour,
+      // min: min < 10 ? "0" + min : min,
+      // sec: sec < 10 ? "0" + sec : sec
+      //longform style
+      day: day,
+      hour: hour,
+      min: min,
+      sec: sec
     });
   }
   renderDays() {
@@ -50,10 +56,37 @@ class Countdown extends Component {
       return "";
     }
   }
+  renderHours() {
+    if (this.state.hour > 1) {
+      return this.state.hour + " hours ";
+    } else if (this.state.hour === 1) {
+      return this.state.hour + " hour ";
+    } else {
+      return "";
+    }
+  }
+  renderMins() {
+    if (this.state.min > 1) {
+      return this.state.min + " minutes ";
+    } else if (this.state.min === 1) {
+      return this.state.min + " minute ";
+    } else {
+      return "";
+    }
+  }
+  renderSecs() {
+    if (this.state.sec > 1) {
+      return this.state.sec + " seconds ";
+    } else if (this.state.sec === 1) {
+      return this.state.sec + " second ";
+    } else {
+      return "";
+    }
+  }
   render() {
     return (
       <div>
-        {this.renderDays()} {this.state.hour}:{this.state.min}:{this.state.sec}
+        Liftoff in T - {this.renderDays()} {this.renderHours()} {this.renderMins()} {this.renderSecs()}
       </div>
     );
   }
