@@ -2,16 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import SearchResult from './SearchResult.jsx'
 import PropTypes from 'prop-types'
-import {Input, FormLabel, Button, Icon, IconButton, List, ListItem, withStyles } from '@material-ui/core'
+import {Input, FormLabel, Button, Icon, IconButton, List, ListItem } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 import DeleteIcon from '@material-ui/icons/Delete'
 
-const styles = theme => ({
-  root: {
-    textAlign: 'center',
-    paddingTop: theme.spacing.unit * 20,
-  },
-});
 
 class Search extends Component {
   constructor(props) {
@@ -23,7 +17,7 @@ class Search extends Component {
   }
   searchTerm = (e) => {
     this.setState({
-      searchTerm: [e.target.value]
+      searchTerm: e.target.value
     })
   }
   searchHandler = (e) => {
@@ -37,14 +31,15 @@ class Search extends Component {
   }
   removeHandler = () => {
     this.setState({
-      searchResult: []
+      searchResult: [],
+      searchTerm: ''
     })
   }
   render() { 
     return (
       <List>
         <ListItem>
-        <FormLabel><Input type="text" placeholder="search for launches!" onChange={this.searchTerm}/><IconButton type='submit' onClick={this.searchHandler}><SearchIcon /></IconButton><IconButton onClick={this.removeHandler}><DeleteIcon /></IconButton></FormLabel>
+        <FormLabel id="searchForm"><Input type="text" placeholder="search for launches!" value={this.state.searchTerm} onChange={this.searchTerm} id="inputSearchInfo"/><IconButton type='submit' onClick={this.searchHandler} id="searchButton" aria-label="Search"><SearchIcon /></IconButton><IconButton onClick={this.removeHandler} id="clearSearch" aria-label="Clear"><DeleteIcon /></IconButton></FormLabel>
         </ListItem>
       <SearchResult search = {this.state.searchResult} />
       </List>
@@ -53,7 +48,8 @@ class Search extends Component {
 }
 
 Search.propTypes = {
-  classes: PropTypes.object.isRequired
+  searchTerm: PropTypes.string,
+  searchResult: PropTypes.array
 }
 
-export default withStyles(styles)(Search);
+export default Search;
